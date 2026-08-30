@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard — SeedSAds</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <button class="sidebar-toggle" onclick="toggleSidebar()" title="Collapse sidebar">◀</button>
+
+  <div class="sidebar-brand">
+    <div class="logo-icon">🌱</div>
+    <div class="logo-text">Seeds<span>Ads</span></div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="sidebar-nav-section">Main</div>
+    <div class="sidebar-nav-item active" onclick="showSection('dashboard')" data-section="dashboard">
+      <span class="nav-icon">📊</span>
+      <span class="nav-label">Dashboard</span>
+    </div>
+    <div class="sidebar-nav-item" onclick="showSection('users')" data-section="users">
+      <span class="nav-icon">👥</span>
+      <span class="nav-label">Users</span>
+    </div>
+    <div class="sidebar-nav-item" onclick="showSection('orders')" data-section="orders">
+      <span class="nav-icon">🛒</span>
+      <span class="nav-label">Orders</span>
+    </div>
+    <div class="sidebar-nav-item" onclick="showSection('courses')" data-section="courses">
+      <span class="nav-icon">🎓</span>
+      <span class="nav-label">Courses</span>
+    </div>
+
+    <div class="sidebar-nav-section">Content</div>
+    <div class="sidebar-nav-item" onclick="showSection('blog')" data-section="blog">
+      <span class="nav-icon">📝</span>
+      <span class="nav-label">Blog Posts</span>
+    </div>
+    <div class="sidebar-nav-item" onclick="showSection('services')" data-section="services">
+      <span class="nav-icon">⚙️</span>
+      <span class="nav-label">Services</span>
+    </div>
+    <div class="sidebar-nav-item" onclick="showSection('contacts')" data-section="contacts">
+      <span class="nav-icon">📧</span>
+      <span class="nav-label">Contacts</span>
+    </div>
+
+    <div class="sidebar-nav-section">System</div>
+    <div class="sidebar-nav-item" onclick="showSection('settings')" data-section="settings">
+      <span class="nav-icon">🔧</span>
+      <span class="nav-label">Settings</span>
+    </div>
+  </nav>
+
+  <div class="sidebar-footer">
+    <div class="sidebar-user">
+      <div class="avatar">SA</div>
+      <div class="user-info">
+        <div class="user-name">Super Admin</div>
+        <div class="user-role">Administrator</div>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<!-- MAIN CONTENT -->
+<div class="main-content">
+
+  <!-- HEADER -->
+  <header class="admin-header">
+    <div class="header-search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" placeholder="Search users, orders, posts...">
+    </div>
+    <div class="header-actions">
+      <button class="header-btn" title="Notifications">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        <span class="notification-dot"></span>
+      </button>
+      <button class="header-btn" title="Messages">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      </button>
+      <button class="header-btn" onclick="window.location.href='login.html'" title="Logout">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- PAGE CONTENT -->
+  <div class="page-content">
+
+    <!-- ========== DASHBOARD ========== -->
+    <div class="content-section active" id="section-dashboard">
+      <div class="page-header">
+        <div>
+          <h1>Dashboard</h1>
+          <p>Welcome back! Here's what's happening with your business.</p>
+        </div>
+        <button class="btn btn-primary">+ New Campaign</button>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <span class="stat-card-title">Total Revenue</span>
+            <div class="stat-card-icon" style="background:rgba(16,185,129,0.15);color:var(--admin-green);">💰</div>
+          </div>
+          <div class="stat-card-value" style="color:var(--admin-green);">₦24.8M</div>
+          <div class="stat-card-change up">↑ 12.5% <span style="color:var(--admin-text-dim);font-weight:400;">vs last month</span></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <span class="stat-card-title">Active Users</span>
+            <div class="stat-card-icon" style="background:rgba(59,130,246,0.15);color:var(--admin-blue);">👥</div>
+          </div>
+          <div class="stat-card-value" style="color:var(--admin-blue);">12,847</div>
+          <div class="stat-card-change up">↑ 8.2% <span style="color:var(--admin-text-dim);font-weight:400;">vs last month</span></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <span class="stat-card-title">Total Orders</span>
+            <div class="stat-card-icon" style="background:rgba(245,158,11,0.15);color:var(--admin-orange);">🛒</div>
+          </div>
+          <div class="stat-card-value" style="color:var(--admin-orange);">3,429</div>
+          <div class="stat-card-change down">↓ 2.1% <span style="color:var(--admin-text-dim);font-weight:400;">vs last month</span></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <span class="stat-card-title">Course Enrollments</span>
+            <div class="stat-card-icon" style="background:rgba(124,58,237,0.15);color:var(--admin-purple);">🎓</div>
+          </div>
+          <div class="stat-card-value" style="color:var(--admin-purple);">8,932</div>
+          <div class="stat-card-change up">↑ 18.4% <span style="color:var(--admin-text-dim);font-weight:400;">vs last month</span></div>
+        </div>
+      </div>
+
+      <!-- Charts Row -->
+      <div class="charts-row">
+        <div class="chart-card">
+          <div class="chart-card-header">
+            <span class="chart-card-title">Revenue Overview</span>
+            <div class="chart-card-filter">
+              <button class="chart-filter-btn active">7D</button>
+              <button class="chart-filter-btn">30D</button>
+              <button class="chart-filter-btn">90D</button>
+              <button class="chart-filter-btn">1Y</button>
+            </div>
+          </div>
+          <canvas id="revenueChart" height="100"></canvas>
+        </div>
+        <div class="chart-card">
+          <div class="chart-card-header">
+            <span class="chart-card-title">Traffic Sources</span>
+          </div>
+          <canvas id="trafficChart" height="200"></canvas>
+        </div>
+      </div>
+
+      <!-- Recent Orders + Activity -->
+      <div class="charts-row">
+        <div class="table-card">
+          <div class="table-card-header">
+            <span class="table-card-title">Recent Orders</span>
+            <button class="btn btn-sm btn-secondary">View All</button>
+          </div>
+          <table class="data-table">
+            <thead><tr><th>Order ID</th><th>Customer</th><th>Product</th><th>Amount</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td>#ORD-7291</td><td><div class="table-user"><div class="avatar" style="background:linear-gradient(135deg,#3B82F6,#7C3AED);">AO</div><div><div class="name">Adebola Ogunlesi</div></div></div></td><td>Growth Playbook</td><td>₦12,000</td><td><span class="badge badge-success">Completed</span></td></tr>
+              <tr><td>#ORD-7290</td><td><div class="table-user"><div class="avatar" style="background:linear-gradient(135deg,#E91E63,#F59E0B);">CN</div><div><div class="name">Chioma Nwosu</div></div></div></td><td>Landing Page Kit</td><td>₦15,000</td><td><span class="badge badge-warning">Pending</span></td></tr>
+              <tr><td>#ORD-7289</td><td><div class="table-user"><div class="avatar" style="background:linear-gradient(135deg,#10B981,#3B82F6);">TK</div><div><div class="name">Tunde Koleoso</div></div></div></td><td>Complete Toolkit</td><td>₦45,000</td><td><span class="badge badge-success">Completed</span></td></tr>
+              <tr><td>#ORD-7288</td><td><div class="table-user"><div class="avatar" style="background:linear-gradient(135deg,#7C3AED,#E91E63);">FM</div><div><div class="name">Fatima Mohammed</div></div></div></td><td>Email Templates</td><td>₦10,000</td><td><span class="badge badge-info">Processing</span></td></tr>
+              <tr><td>#ORD-7287</td><td><div class="table-user"><div class="avatar" style="background:linear-gradient(135deg,#F59E0B,#EF4444);">JO</div><div><div class="name">James Okafor</div></div></div></td><td>SEO Calendar</td><td>₦7,000</td><td><span class="badge badge-success">Completed</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="chart-card">
+          <div class="chart-card-header">
+            <span class="chart-card-title">Recent Activity</span>
+          </div>
+          <div class="activity-item">
+            <div class="activity-icon" style="background:rgba(16,185,129,0.15);color:var(--admin-green);">💰</div>
+            <div class="activity-content">
+              <div class="activity-text"><strong>New order</strong> from Chioma Nwosu for ₦15,000</div>
+              <div class="activity-time">2 minutes ago</div>
+            </div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-icon" style="background:rgba(59,130,246,0.15);color:var(--admin-blue);">👤</div>
+            <div class="activity-content">
+              <div class="activity-text"><strong>New user</strong> registered — fatima.m@email.com</div>
+              <div class="activity-time">15 minutes ago</div>
+            </div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-icon" style="background:rgba(124,58,237,0.15);color:var(--admin-purple);">🎓</div>
+            <div class="activity-content">
+              <div class="activity-text"><strong>Course enrollment</strong> — Social Media Marketing Masterclass</div>
+              <div class="activity-time">32 minutes ago</div>
+            </div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-icon" style="background:rgba(245,158,11,0.15);color:var(--admin-orange);">📝</div>
+            <div class="activity-content">
+              <div class="activity-text"><strong>Blog post published</strong> — "How to Achieve 10X ROAS"</div>
+              <div class="activity-time">1 hour ago</div>
+            </div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-icon" style="background:rgba(239,68,68,0.15);color:var(--admin-red);">📧</div>
+            <div class="activity-content">
+              <div class="activity-text"><strong>New contact form</strong> — Enterprise inquiry from Access Bank</div>
+              <div class="activity-time">2 hours ago</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== USERS ========== -->
+    <div class="content-section" id="section-users">
+      <div class="page-header">
+        <div>
+          <h1>Users</h1>
+          <p>Manage your registered users and students.</p>
+        </div>
+        <button class="btn btn-primary" onclick="openModal('userModal')">+ Add User</button>
+      </div>
+
+      <div class="tabs">
+        <div class="tab active" onclick="switchTab(this, 'all-users')">All Users</div>
+        <div class="tab" onclick="switchTab(this, 'students')">Students</div>
+        <div class="tab" onclick="switchTab(this, 'instructors')">Instructors</div>
+        <div class="tab" onclick="switchTab(this, 'admins')">Admins</div>
+      </div>
+
+      <div class="table-card">
+        <div class="table-card-header">
+          <span class="table-card-title">All Users (2,847)</span>
+          <div style="display:flex;gap:8px;">
+            <input type="text" placeholder="Search users..." style="padding:6px 12px;background:var(--admin-bg);border:1px solid var(--admin-border);border-radius:6px;color:var(--admin-text);font-size:13px;width:200px;">
+            <button class="btn btn-sm btn-secondary">Filter</button>
+          </div>
+        </div>
+        <table class="data-table">
+          <thead><tr><th>User</th><th>Role</th><th>Status</th><th>Joined</th><th>Courses</th><th>Actions</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><div class="table-user"><div class="avatar" style="background:linear-gradient(135deg,#3B82F6,#7C3AED);">AO</div><div><div class="name">Adebola Ogunlesi</div><div class="email">adebola@luxeretail.ng</div></div></div></td>
+              <td><span class="badge badge-info">Client</span></td>
+              <td><span class="badge badge-success">Active</span></td>
+              <td>Jan 15, 2026</td>
+              <td>3</td>
+              <td><div class="table-actions"><button class="btn btn-sm btn-secondary btn-icon">✏️</button><button class="btn btn-sm btn-secondary btn-icon">🗑️</button></div></td>
+            </tr>
+            <tr>
+              <td><div class="table-user"><div class="avatar" style="background:linear-gradient(135deg,#E91E63,#F59E0B);">CN</div><div><div class="name">Chioma Nwosu</div><div class="email">chioma@glowbeauty.com</div></div></div></td>
+              <td><span class="badge badge-info">Client</span></td>
+              <td><span class="badge badge-success">Active</span></td>
+              <td>Feb 3, 2026</td>
+              <td>5</td>
+              <td><div class="table-actions"><button class="btn btn-sm btn-secondary btn-icon">✏️</button><button class="btn btn-sm btn-secondary btn-icon">🗑️</button></div></td>
+            </tr>
+            <tr>
+              <td><div class="table-user"><div class="avatar" style="background:linear-gradient(135deg,#10B981,#3B82F6);">TK</div><div><div class="name">Tunde Koleoso</div><div class="email">tunde@payswift.io</div></div></div></td>
+              <td><span class="badge badge-purple">Student</span></td>
+              <td><span class="badge badge-success">Active</span></td>
+              <td>Mar 12, 2026</td>
+              <td>2</td>
+              <td><div class="table-actions"><button class="btn btn-sm btn-secondary btn-icon">✏️</button><button class="btn btn-sm btn-secondary btn-icon">🗑️</button></div></td>
+            </tr>
+            <tr>
+              <td><div class="table-user"><div class="avatar" style="background:linear-gradient(135deg,#7C3AED,#E91E63);">FM</div><div><div class="name">Fatima Mohammed</div><div class="email">fatima.m@gmail.com</div></div></div></td>
+              <td><span class="badge badge-purple">Student</span></td>
+              <td><span class="badge badge-warning">Pending</span></td>
+              <td>Aug 28, 2026</td>
+              <td>0</td>
+              <td><div class="table-actions"><button class="btn btn-sm btn-secondary btn-icon">✏️</button><button class="btn btn-sm btn-secondary btn-icon">🗑️</button></div></td>
+            </tr>
+            <tr>
+              <td><div class="table-user"><div class="avatar" style="background:linear-gradient(135deg,#F59E0B,#EF4444);">JO</div><div><div class="name">James Okafor</div><div class="email">james.o@techhub.ng</div></div></div></td>
+              <td><span class="badge badge-info">Client</span></td>
+              <td><span class="badge badge-success">Active</span></td>
+              <td>Jun 5, 2026</td>
+              <td>1</td>
+              <td><div class="table-actions"><button class="btn btn-sm btn-secondary btn-icon">✏️</button><button class="btn btn-sm btn-secondary btn-icon">🗑️</button></div></td>
+            </tr>
+            <tr>
+              <td><div class="table-user"><div class="avatar" style="background:linear-gradient(135deg,#06B6D4,#3B82F6);">SO</div><div><div class="name">Sarah Osei</div><div class="email">sarah.osei@edu.gh</div></div></div></td>
+              <td><span class="badge badge-warning">Instructor</span></td>
+              <td><span class="badge badge-success">Active</span></td>
+              <td>Apr 20, 2026</td>
+              <td>2</td>
+              <td><div class="table-actions"><button class="btn btn-sm btn-secondary btn-icon">✏️</button><button class="btn btn-sm btn-secondary btn-icon">🗑️</button></div></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="pagination">
+          <span class="pagination-info">Showing 1-6 of 2,847 users</span>
+          <div class="pagination-buttons">
+            <button class="page-btn">←</button>
+            <button class="page-btn active">1</button>
+            <button class="page-btn">2</button>
+            <button class="page-btn">3</button>
+            <button class="page-btn">→</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== ORDERS ========== -->
+    <div class="content-section" id="section-orders">
+      <div class="page-header">
+        <div>
+          <h1>Orders</h1>
+          <p>Track and manage all shop orders.</p>
+        </div>
+        <button class="btn btn-primary">+ Create Order</button>
+      </div>
+
+      <div class="stats-grid" style="grid-template-columns:repeat(4,1fr);">
+        <div class="stat-card">
+          <div class="stat-card-header"><span class="stat-card-title">Total Orders</span><div class="stat-card-icon" style="background:rgba(59,130,246,0.15);color:var(--admin-blue);">📦</div></div>
+          <div class="stat-card-value" style="color:var(--admin-blue);">3,429</div>
+          <div class="stat-card-change up">↑ 5.3% vs last month</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-header"><span class="stat-card-title">Revenue</span><div class="stat-card-icon" style="background:rgba(16,185,129,0.15);color:var(--admin-green);">💰</div></div>
+          <div class="stat-card-value" style="color:var(--admin-green);">₦24.8M</div>
+          <div class="stat-card-change up">↑ 12.5% vs last month</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-header"><span class="stat-card-title">Pending</span><div class="stat-card-icon" style="background:rgba(245,158,11,0.15);color:var(--admin-orange);">⏳</div></div>
+          <div class="stat-card-value" style="color:var(--admin-orange);">142</div>
+          <div class="stat-card-change down">↓ 8.1% vs last month</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-header"><span class="stat-card-title">Refunded</span><div class="stat-card-icon" style="background:rgba(239,68,68,0.15);color:var(--admin-red);">↩️</div></div>
+          <div class="stat-card-value" style="color:var(--admin-red);">23</div>
+          <div class="stat-card-change up">↑ 1.2% vs last month</div>
+        </div>
+      </div>
+
+      <div class="table-card">
+        <div class="table-card-header">
+          <span class="table-card-title">All Orders</span>
+          <div style="display:flex;gap:8px;">
+            <select style="padding:6px 12px;background:var(--admin-bg);border:1px solid var(--admin-border);border-radius:6px;color:var(--admin-text);font-size:13px;">
+              <option>All Status</option><option>Completed</option><option>Pending</option><option>Processing</option><option>Cancelled</option>
+            </select>
+            <button class="btn btn-sm btn-secondary">Export CSV</button>
+          </div>
+        </div>
+        <table class="data-table">
+          <thead><tr><th>Order ID</th><th>Date</th><th>Customer</th><th>Items</th><th>Total</th><th>Status</th><th>Actions</th></tr></thead>
+          <tbody>
+            <tr><td>#ORD-7291</td><td>Aug 30, 2026</td><td>Adebola Ogunlesi</td><td>2 items</td><td>₦27,000</td><td><span class="badge badge-success">Completed</span></td><td><div class="table-actions"><button class="btn btn-sm btn-secondary btn-icon">👁️</button><button class="btn btn-sm btn-secondary btn-icon">✏️</button></div></td></tr>
+            <tr><td>#ORD-7290</td><td>Aug 30, 2026</td><td>Chioma Nwosu</td><td>1 item</td><td>₦15,000</td><td><span class="badge badge-warning">Pending</span></td><td><div class="table-actions"><button class="btn btn-sm btn-secondary btn-icon">👁️</button><button class="btn btn-sm btn-secondary btn-icon">✏️</button></div></td></tr>
+            <tr><td>#ORD-7289</td><td>Aug 29, 2026</td><td>Tunde Koleoso</td><td>3 items</td><td>₦58,000</td><td><span class="badge badge-success">Completed</span></td><td><div class="table-actions"><button class="btn btn-sm btn-secondary btn-icon">👁️</button><button class="btn btn-sm btn-secondary btn-icon">✏️</button></div></td></tr>
+            <tr><td>#ORD-7288</td><td>Aug 29, 2026</td><td>Fatima Mohammed</td><td>1 item</td><td>₦10,000</td><td><span class="badge badge-info">Processing</span></td><td><div class="table-actions"><button class="btn btn-sm btn-secondary btn-icon">👁️</button><button class="btn btn-sm btn-secondary btn-icon">✏️</button></div></td></tr>
+            <tr><td>#ORD-7287</td><td>Aug 28, 2026</td><td>James Okafor</td><td>2 items</td><td>₦19,000</td><td><span class="badge badge-success">Completed</span></td><td><div class="table-actions"><button class="btn btn-sm btn-secondary btn-icon">👁️</button><button class="btn btn-sm btn-secondary btn-icon">✏️</button></div></td></tr>
+            <tr><td>#ORD-7286</td><td>Aug 28, 2026</td><td>Sarah Osei</td><td>1 item</td><td>₦45,000</td><td><span class="badge badge-danger">Cancelled</span></td><td><div class="table-actions"><button class="btn btn-sm btn-secondary btn-icon">👁️</button><button class="btn btn-sm btn-secondary btn-icon">✏️</button></div></td></tr>
+          </tbody>
+        </table>
+        <div class="pagination">
+          <span class="pagination-info">Showing 1-6 of 3,429 orders</span>
+          <div class="pagination-buttons">
+            <button class="page-btn">←</button><button class="page-btn active">1</button><button class="page-btn">2</button><button class="page-btn">3</button><button class="page-btn">→</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== COURSES ========== -->
+    <div class="content-section" id="section-courses">
+      <div class="page-header">
+        <div>
+          <h1>Courses</h1>
+          <p>Manage DMI courses, students, and certifications.</p>
+        </div>
+        <button class="btn btn-primary">+ New Course</button>
+      </div>
+
+      <div class="stats-grid" style="grid-template-columns:repeat(4,1fr);">
+        <div class="stat-card">
+          <div class="stat-card-header"><span class="stat-card-title">Total Courses</span><div class="stat-card-icon" style="background:rgba(124,58,237,0.15);color:var(--admin-purple);">📚</div></div>
+          <div class="stat-card-value" style="color:var(--admin-purple);">24</div>
+          <div class="stat-card-change up">↑ 2 new this month</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-header"><span class="stat-card-title">Enrollments</span><div class="stat-card-icon" style="background:rgba(59,130,246,0.15);color:var(--admin-blue);">🎓</div></div>
+          <div class="stat-card-value" style="color:var(--admin-blue);">8,932</div>
+          <div class="stat-card-change up">↑ 18.4% vs last month</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-header"><span class="stat-card-title">Certificates</span><div class="stat-card-icon" style="background:rgba(16,185,129,0.15);color:var(--admin-green);">🏆</div></div>
+          <div class="stat-card-value" style="color:var(--admin-green);">3,241</div>
+          <div class="stat-card-change up">↑ 9.7% vs last month</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-header"><span class="stat-card-title">Avg. Score</span><div class="stat-card-icon" style="background:rgba(245,158,11,0.15);color:var(--admin-orange);">📊</div></div>
+          <div class="stat-card-value" style="color:var(--admin-orange);">87%</div>
+          <div class="stat-card-change up">↑ 3.2% vs last month</div>
+        </div>
+      </div>
+
+      <div class="table-card">
+        <div class="table-card-header">
+          <span class="table-card-title">All Courses</span>
+          <div style="display:flex;gap:8px;">
+            <input type="text" placeholder="Search courses..." style="padding:6px 12px;background:var(--admin-bg);border:1px solid var(--admin-border);border-radius:6px;color:var(--admin-text);font-size:13px;width:200px;">
+            <button class="btn btn-sm btn-secondary">Filter</button>
+          </div>
+        </div>
+        <table class="data-table">
+          <thead><tr><th>Course</th><th>Instructor</th><th>Students</th><th>Duration</th><th>Price</th><th>Status</th><th>Actions</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Social Media Marketing Masterclass</strong></td><td>Sarah Osei</td><td>2,400</td><td>12 Weeks</td><td>₦45,000</td><td><span class="badge badge-success">Active</span></td><td><div class="table-actions"><button class="btn btn-sm btn-secondary btn-icon">✏️</button><button class="btn btn-sm btn-secondary btn-icon">📊</button></div></td></tr>
+            <tr><td><strong>Performance Marketing Pro</strong></td><td>David Chen</td><td>1,800</td><td>16 Weeks</td><td>₦60,000</td><td><span class="badge badge-success">Active</span></td><td><div class="table-actions"><button class="btn btn-sm btn-secondary btn-icon">✏️</button><button class="btn btn-sm btn-secondary btn-icon">📊</button></div></td></tr>
+            <tr><td><strong>SEO & Content Strategy</strong></td><td>Amina Bello</td><td>3,100</td><td>10 Weeks</td><td>₦35,000</td><td><span class="badge badge-success">Active</span></td><td><div class="table-actions"><button class="btn btn-sm btn-secondary btn-icon">✏️</button><button class="btn btn-sm btn-secondary btn-icon">📊</button></div></td></tr>
+            <tr><td><strong>Email Marketing Automation</strong></td><td>James Okafor</td><td>1,500</td><td>8 Weeks</td><td>₦30,000</td><td><span class="badge badge-success">Active</span></td><td><div class="table-actions"><button class="btn btn-sm btn-secondary btn-icon">✏️</button><button class="btn btn-sm btn-secondary btn-icon">📊</button></div></td></tr>
+            <tr><td><strong>Analytics & Data-Driven Marketing</strong></td><td>Lisa Park</td><td>980</td><td>10 Weeks</td><td>₦40,000</td><td><span class="badge badge-warning">Draft</span></td><td><div class="table-actions"><button class="btn btn-sm btn-secondary btn-icon">✏️</button><button class="btn btn-sm btn-secondary btn-icon">📊</button></div></td></tr>
+            <tr><td><strong>Growth Hacking Bootcamp</strong></td><td>Mark Johnson</td><td>2,200</td><td>6 Weeks</td><td>₦25,000</td><td><span class="badge badge-success">Active</span></td><td><div class="table-actions"><button class="btn btn-sm btn-secondary btn-icon">✏️</button><button class="btn btn-sm btn-secondary btn-icon">📊</button></div></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ========== BLOG ========== -->
+    <div class="content-section" id="section-blog">
+      <div class="page-header">
+        <div>
+          <h1>Blog Posts</h1>
+          <p>Manage insights, articles, and content.</p>
+        </div>
+        <button class="btn btn-primary">+ New Post</button>
+      </div>
+
+      <div class="stats-grid" style="grid-template-columns:repeat(3,1fr);">
+        <div class="stat-card">
+          <div class="stat-card-header"><span class="stat-card-title">Total Posts</span><div class="stat-card-icon" style="background:rgba(59,130,246,0.15);color:var(--admin-blue);">📝</div></div>
+          <div class="stat-card-value" style="color:var(--admin-blue);">142</div>
+          <div class="stat-card-change up">↑ 8 this month</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-header"><span class="stat-card-title">Total Views</span><div class="stat-card-icon" style="background:rgba(124,58,237,0.15);color:var(--admin-purple);">👁️</div></div>
+          <div class="stat-card-value" style="color:var(--admin-purple);">482K</div>
+          <div class="stat-card-change up">↑ 24.3% vs last month</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-header"><span class="stat-card-title">Newsletter Subs</span><div class="stat-card-icon" style="background:rgba(16,185,129,0.15);color:var(--admin-green);">📬</div></div>
+          <div class="stat-card-value" style="color:var(--admin-green);">15,420</div>
+          <div class="stat-card-change up">↑ 6.8% vs last month</div>
+        </div>
+      </div>
+
+      <div class="table-card">
+        <div class="table-card-header">
+          <span class="table-card-title">All Posts</span>
+          <div style="display:flex;gap:8px;">
+            <select style="padding:6px 12px;background:var(--admin-bg);border:1px solid var(--admin-border);border-radius:6px;color:var(--admin-text);font-size:13px;">
+              <option>All Categories</option><option>Growth Strategy</option><option>SEO</option><option>Email Marketing</option><option>Social Media</option><option>PPC</option><option>Branding</option>
+            </select>
+            <button class="btn btn-sm btn-secondary">Filter</button>
+          </div>
+        </div>
+        <table class="data-table">
+          <thead><tr><th>Post</th><th>Category</th><th>Author</th><th>Views</th><th>Date</th><th>Status</th><th>Actions</th></tr></thead>
+          <tbody>
+            <tr><td><strong>How to Achieve 10X ROAS on Meta Ads in 2024</strong></td><td><span class="badge badge-info">Growth Strategy</span></td><td>David Chen</td><td>12,450</td><td>Aug 28, 2026</td><td><span class="badge badge-success">Published</span></td><td><div class="table-actions"><button class="btn btn-sm btn-secondary btn-icon">✏️</button><button class="btn btn-sm btn-secondary btn-icon">👁️</button></div></td></tr>
+            <tr><td><strong>The Complete Guide to Ranking #1 on Google in Nigeria</strong></td><td><span class="badge badge-purple">SEO</span></td><td>Amina Bello</td><td>9,820</td><td>Aug 25, 2026</td><td><span class="badge badge-success">Published</span></td><td><div class="table-actions"><button class="btn btn-sm btn-secondary btn-icon">✏️</button><button class="btn btn-sm btn-secondary btn-icon">👁️</button></div></td></tr>
+            <tr><td><strong>Email Sequences That Convert: A Data-Backed Framework</strong></td><td><span class="badge badge-warning">Email Marketing</span></td><td>James Okafor</td><td>7,340</td><td>Aug 22, 2026</td><td><span class="badge badge-success">Published</span></td><td><div class="table-actions"><button class="btn btn-sm btn-secondary btn-icon">✏️</button><button class="btn btn-sm btn-secondary btn-icon">👁️</button></div></td></tr>
+            <tr><td><strong>TikTok Marketing for African Brands: The 2024 Playbook</strong></td><td><span class="badge badge-info">Social Media</span></td><td>Sarah Osei</td><td>15,200</td><td>Aug 20, 2026</td><td><span class="badge badge-success">Published</span></td><td><div class="table-actions"><button class="btn btn-sm btn-secondary btn-icon">✏️</button><button class="btn btn-sm btn-secondary btn-icon">👁️</button></div></td></tr>
+            <tr><td><strong>Building a Brand That People Actually Care About</strong></td><td><span class="badge badge-success">Branding</span></td><td>Lisa Park</td><td>5,670</td><td>Aug 18, 2026</td><td><span class="badge badge-warning">Draft</span></td><td><div class="table-actions"><button class="btn btn-sm btn-secondary btn-icon">✏️</button><button class="btn btn-sm btn-secondary btn-icon">👁️</button></div></td></tr>
+            <tr><td><strong>Google Ads vs. Meta Ads: Where Should You Spend in 2024?</strong></td><td><span class="badge badge-danger">PPC</span></td><td>Mark Johnson</td><td>8,910</td><td>Aug 15, 2026</td><td><span class="badge badge-success">Published</span></td><td><div class="table-actions"><button class="btn btn-sm btn-secondary btn-icon">✏️</button><button class="btn btn-sm btn-secondary btn-icon">👁️</button></div></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ========== SERVICES ========== -->
+    <div class="content-section" id="section-services">
+      <div class="page-header">
+        <div>
+          <h1>Services</h1>
+          <p>Manage service offerings and client projects.</p>
+        </div>
+        <button class="btn btn-primary">+ Add Service</button>
+      </div>
+
+      <div class="stats-grid" style="grid-template-columns:repeat(3,1fr);">
+        <div class="stat-card">
+          <div class="stat-card-header"><span class="stat-card-title">Active Projects</span><div class="stat-card-icon" style="background:rgba(59,130,246,0.15);color:var(--admin-blue);">🚀</div></div>
+          <div class="stat-card-value" style="color:var(--admin-blue);">47</div>
+          <div class="stat-card-change up">↑ 5 new this month</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-header"><span class="stat-card-title">Total Clients</span><div class="stat-card-icon" style="background:rgba(16,185,129,0.15);color:var(--admin-green);">🤝</div></div>
+          <div class="stat-card-value" style="color:var(--admin-green);">200+</div>
+          <div class="stat-card-change up">↑ 12 new this month</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-header"><span class="stat-card-title">Client Retention</span><div class="stat-card-icon" style="background:rgba(245,158,11,0.15);color:var(--admin-orange);">🎯</div></div>
+          <div class="stat-card-value" style="color:var(--admin-orange);">98%</div>
+          <div class="stat-card-change up">↑ 1.2% vs last month</div>
+        </div>
+      </div>
+
+      <div class="table-card">
+        <div class="table-card-header">
+          <span class="table-card-title">Service Offerings</span>
+          <button class="btn btn-sm btn-secondary">Edit Pricing</button>
+        </div>
+        <table class="data-table">
+          <thead><tr><th>Service</th><th>Category</th><th>Clients</th><th>Revenue</th><th>Status</th><th>Actions</th></tr></thead>
+          <tbody>
+            <tr><td><strong>SEO & Search Optimisation</strong></td><td>Organic Growth</td><td>68</td><td>₦4.2M</td><td><span class="badge badge-success">Active</span></td><td><div class="table-actions"><button class="btn btn-sm btn-secondary btn-icon">✏️</button><button class="btn btn-sm btn-secondary btn-icon">📊</button></div></td></tr>
+            <tr><td><strong>Lead Generation & Funnels</strong></td><td>Conversion</td><td>45</td><td>₦3.8M</td><td><span class="badge badge-success">Active</span></td><td><div class="table-actions"><button class="btn btn-sm btn-secondary btn-icon">✏️</button><button class="btn btn-sm btn-secondary btn-icon">📊</button></div></td></tr>
+            <tr><td><strong>PPC Advertising</strong></td><td>Paid Growth</td><td>92</td><td>₦8.5M</td><td><span class="badge badge-success">Active</span></td><td><div class="table-actions"><button class="btn btn-sm btn-secondary btn-icon">✏️</button><button class="btn btn-sm btn-secondary btn-icon">📊</button></div></td></tr>
+            <tr><td><strong>Social Media Marketing</strong></td><td>Brand Awareness</td><td>78</td><td>₦5.1M</td><td><span class="badge badge-success">Active</span></td><td><div class="table-actions"><button class="btn btn-sm btn-secondary btn-icon">✏️</button><button class="btn btn-sm btn-secondary btn-icon">📊</button></div></td></tr>
+            <tr><td><strong>Content Marketing</strong></td><td>Content</td><td>34</td><td>₦2.3M</td><td><span class="badge badge-success">Active</span></td><td><div class="table-actions"><button class="btn btn-sm btn-secondary btn-icon">✏️</button><button class="btn btn-sm btn-secondary btn-icon">📊</button></div></td></tr>
+            <tr><td><strong>Email Marketing</strong></td><td>Retention</td><td>56</td><td>₦3.1M</td><td><span class="badge badge-success">Active</span></td><td><div class="table-actions"><button class="btn btn-sm btn-secondary btn-icon">✏️</button><button class="btn btn-sm btn-secondary btn-icon">📊</button></div></td></tr>
+            <tr><td><strong>Analytics & CRO</strong></td><td>Data</td><td>28</td><td>₦1.8M</td><td><span class="badge badge-success">Active</span></td><td><div class="table-actions"><button class="btn btn-sm btn-secondary btn-icon">✏️</button><button class="btn btn-sm btn-secondary btn-icon">📊</button></div></td></tr>
+            <tr><td><strong>Digital Consultancy</strong></td><td>Strategy</td><td>15</td><td>₦1.2M</td><td><span class="badge badge-success">Active</span></td><td><div class="table-actions"><button class="btn btn-sm btn-secondary btn-icon">✏️</button><button class="btn btn-sm btn-secondary btn-icon">📊</button></div></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ========== CONTACTS ========== -->
+    <div class="content-section" id="section-contacts">
+      <div class="page-header">
+        <div>
+          <h1>Contact Submissions</h1>
+          <p>Manage inquiries from the Get Started form.</p>
+        </div>
+        <button class="btn btn-primary">Export All</button>
+      </div>
+
+      <div class="stats-grid" style="grid-template-columns:repeat(3,1fr);">
+        <div class="stat-card">
+          <div class="stat-card-header"><span class="stat-card-title">Total Inquiries</span><div class="stat-card-icon" style="background:rgba(59,130,246,0.15);color:var(--admin-blue);">📧</div></div>
+          <div class="stat-card-value" style="color:var(--admin-blue);">1,247</div>
+          <div class="stat-card-change up">↑ 34 this month</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-header"><span class="stat-card-title">Pending Response</span><div class="stat-card-icon" style="background:rgba(245,158,11,0.15);color:var(--admin-orange);">⏳</div></div>
+          <div class="stat-card-value" style="color:var(--admin-orange);">18</div>
+          <div class="stat-card-change down">↓ 5 vs last week</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-header"><span class="stat-card-title">Converted</span><div class="stat-card-icon" style="background:rgba(16,185,129,0.15);color:var(--admin-green);">✅</div></div>
+          <div class="stat-card-value" style="color:var(--admin-green);">342</div>
+          <div class="stat-card-change up">↑ 27.4% conversion</div>
+        </div>
+      </div>
+
+      <div class="table-card">
+        <div class="table-card-header">
+          <span class="table-card-title">Recent Submissions</span>
+          <div style="display:flex;gap:8px;">
+            <select style="padding:6px 12px;background:var(--admin-bg);border:1px solid var(--admin-border);border-radius:6px;color:var(--admin-text);font-size:13px;">
+              <option>All Status</option><option>New</option><option>Contacted</option><option>Qualified</option><option>Converted</option><option>Closed</option>
+            </select>
+          </div>
+        </div>
+        <table class="data-table">
+          <thead><tr><th>Name</th><th>Email</th><th>Company</th><th>Service</th><th>Budget</th><th>Date</th><th>Status</th><th>Actions</th></tr></thead>
+          <tbody>
+            <tr><td><strong>John Doe</strong></td><td>john@acme.com</td><td>Acme Inc</td><td>Full-Service Marketing</td><td>₦1M - ₦5M</td><td>Aug 30, 2026</td><td><span class="badge badge-success">New</span></td><td><div class="table-actions"><button class="btn btn-sm btn-secondary btn-icon">👁️</button><button class="btn btn-sm btn-secondary btn-icon">✉️</button></div></td></tr>
+            <tr><td><strong>Jane Smith</strong></td><td>jane@techflow.io</td><td>TechFlow</td><td>PPC Advertising</td><td>₦500K - ₦1M</td><td>Aug 30, 2026</td><td><span class="badge badge-success">New</span></td><td><div class="table-actions"><button class="btn btn-sm btn-secondary btn-icon">👁️</button><button class="btn btn-sm btn-secondary btn-icon">✉️</button></div></td></tr>
+            <tr><td><strong>Michael Brown</strong></td><td>mike@fashionx.ng</td><td>Fashion X</td><td>Social Media Marketing</td><td>₦100K - ₦500K</td><td>Aug 29, 2026</td><td><span class="badge badge-warning">Contacted</span></td><td><div class="table-actions"><button class="btn btn-sm btn-secondary btn-icon">👁️</button><button class="btn btn-sm btn-secondary btn-icon">✉️</button></div></td></tr>
+            <tr><td><strong>Amanda Wilson</strong></td><td>amanda@realtors.ng</td><td>Realtors NG</td><td>Lead Generation</td><td>₦5M+</td><td>Aug 29, 2026</td><td><span class="badge badge-info">Qualified</span></td><td><div class="table-actions"><button class="btn btn-sm btn-secondary btn-icon">👁️</button><button class="btn btn-sm btn-secondary btn-icon">✉️</button></div></td></tr>
+            <tr><td><strong>Chris Adeyemi</strong></td><td>chris@foodie.ng</td><td>Foodie NG</td><td>SEO & Search</td><td>₦100K - ₦500K</td><td>Aug 28, 2026</td><td><span class="badge badge-purple">Converted</span></td><td><div class="table-actions"><button class="btn btn-sm btn-secondary btn-icon">👁️</button><button class="btn btn-sm btn-secondary btn-icon">✉️</button></div></td></tr>
+            <tr><td><strong>Patricia Okon</strong></td><td>pat@healthplus.ng</td><td>HealthPlus</td><td>Content Marketing</td><td>₦500K - ₦1M</td><td>Aug 28, 2026</td><td><span class="badge badge-danger">Closed</span></td><td><div class="table-actions"><button class="btn btn-sm btn-secondary btn-icon">👁️</button><button class="btn btn-sm btn-secondary btn-icon">✉️</button></div></td></tr>
+          </tbody>
+        </table>
+        <div class="pagination">
+          <span class="pagination-info">Showing 1-6 of 1,247 submissions</span>
+          <div class="pagination-buttons">
+            <button class="page-btn">←</button><button class="page-btn active">1</button><button class="page-btn">2</button><button class="page-btn">3</button><button class="page-btn">→</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== SETTINGS ========== -->
+    <div class="content-section" id="section-settings">
+      <div class="page-header">
+        <div>
+          <h1>Settings</h1>
+          <p>Manage your admin panel and site preferences.</p>
+        </div>
+      </div>
+
+      <div class="settings-group">
+        <h3>General Settings</h3>
+        <p>Configure basic site information and defaults.</p>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Site Name</label>
+            <input type="text" value="SeedSAds">
+          </div>
+          <div class="form-group">
+            <label>Site URL</label>
+            <input type="text" value="https://seedsads.com">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Admin Email</label>
+            <input type="email" value="admin@seedsads.com">
+          </div>
+          <div class="form-group">
+            <label>Support Email</label>
+            <input type="email" value="hello@seedsads.com">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Business Address</label>
+          <input type="text" value="12B Adeyemo Alakija Street, Victoria Island, Lagos, Nigeria">
+        </div>
+      </div>
+
+      <div class="settings-group">
+        <h3>Notifications</h3>
+        <p>Choose what notifications you receive.</p>
+        <div class="setting-item">
+          <div class="setting-info">
+            <h4>New Order Alerts</h4>
+            <p>Get notified when a new order is placed</p>
+          </div>
+          <div class="toggle-switch active" onclick="this.classList.toggle('active')"></div>
+        </div>
+        <div class="setting-item">
+          <div class="setting-info">
+            <h4>New Contact Submissions</h4>
+            <p>Get notified when someone fills the contact form</p>
+          </div>
+          <div class="toggle-switch active" onclick="this.classList.toggle('active')"></div>
+        </div>
+        <div class="setting-item">
+          <div class="setting-info">
+            <h4>Course Enrollments</h4>
+            <p>Get notified when a student enrolls in a course</p>
+          </div>
+          <div class="toggle-switch active" onclick="this.classList.toggle('active')"></div>
+        </div>
+        <div class="setting-item">
+          <div class="setting-info">
+            <h4>Weekly Reports</h4>
+            <p>Receive weekly summary reports via email</p>
+          </div>
+          <div class="toggle-switch" onclick="this.classList.toggle('active')"></div>
+        </div>
+      </div>
+
+      <div class="settings-group">
+        <h3>Security</h3>
+        <p>Manage your account security settings.</p>
+        <div class="setting-item">
+          <div class="setting-info">
+            <h4>Two-Factor Authentication</h4>
+            <p>Add an extra layer of security to your account</p>
+          </div>
+          <div class="toggle-switch" onclick="this.classList.toggle('active')"></div>
+        </div>
+        <div class="setting-item">
+          <div class="setting-info">
+            <h4>Login Notifications</h4>
+            <p>Get alerted on new device logins</p>
+          </div>
+          <div class="toggle-switch active" onclick="this.classList.toggle('active')"></div>
+        </div>
+        <div style="margin-top:16px;">
+          <button class="btn btn-primary">Change Password</button>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:12px;justify-content:flex-end;">
+        <button class="btn btn-secondary">Cancel</button>
+        <button class="btn btn-primary">Save Changes</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ADD USER MODAL -->
+<div class="modal-overlay" id="userModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>Add New User</h3>
+      <button class="modal-close" onclick="closeModal('userModal')">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group"><label>First Name</label><input type="text" placeholder="John"></div>
+        <div class="form-group"><label>Last Name</label><input type="text" placeholder="Doe"></div>
+      </div>
+      <div class="form-group"><label>Email Address</label><input type="email" placeholder="john@example.com"></div>
+      <div class="form-row">
+        <div class="form-group"><label>Role</label><select><option>Client</option><option>Student</option><option>Instructor</option><option>Admin</option></select></div>
+        <div class="form-group"><label>Status</label><select><option>Active</option><option>Pending</option><option>Suspended</option></select></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('userModal')">Cancel</button>
+      <button class="btn btn-primary">Create User</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ===== SIDEBAR =====
+function toggleSidebar() {
+  const sidebar = document.getElementById('sidebar');
+  sidebar.classList.toggle('collapsed');
+  const btn = sidebar.querySelector('.sidebar-toggle');
+  btn.textContent = sidebar.classList.contains('collapsed') ? '▶' : '◀';
+}
+
+// ===== SECTION SWITCHING =====
+function showSection(sectionId) {
+  // Hide all sections
+  document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+  // Show target section
+  const target = document.getElementById('section-' + sectionId);
+  if (target) target.classList.add('active');
+
+  // Update sidebar active state
+  document.querySelectorAll('.sidebar-nav-item').forEach(item => item.classList.remove('active'));
+  const navItem = document.querySelector('.sidebar-nav-item[data-section="' + sectionId + '"]');
+  if (navItem) navItem.classList.add('active');
+
+  // Close mobile sidebar
+  document.getElementById('sidebar').classList.remove('mobile-open');
+}
+
+// ===== TABS =====
+function switchTab(tabEl, tabId) {
+  tabEl.parentElement.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  tabEl.classList.add('active');
+}
+
+// ===== MODAL =====
+function openModal(modalId) {
+  document.getElementById(modalId).classList.add('active');
+}
+function closeModal(modalId) {
+  document.getElementById(modalId).classList.remove('active');
+}
+
+// Close modal on overlay click
+document.querySelectorAll('.modal-overlay').forEach(overlay => {
+  overlay.addEventListener('click', function(e) {
+    if (e.target === this) this.classList.remove('active');
+  });
+});
+
+// ===== CHARTS =====
+const ctxRevenue = document.getElementById('revenueChart').getContext('2d');
+new Chart(ctxRevenue, {
+  type: 'line',
+  data: {
+    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+    datasets: [{
+      label: 'Revenue',
+      data: [420000, 580000, 390000, 720000, 650000, 890000, 760000],
+      borderColor: '#E91E63',
+      backgroundColor: 'rgba(233,30,99,0.1)',
+      borderWidth: 2,
+      fill: true,
+      tension: 0.4,
+      pointBackgroundColor: '#E91E63',
+      pointBorderColor: '#fff',
+      pointBorderWidth: 2,
+      pointRadius: 4
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { grid: { display: false }, ticks: { color: '#64748B', font: { size: 11 } } },
+      y: { grid: { color: '#334155' }, ticks: { color: '#64748B', font: { size: 11 }, callback: v => '₦' + (v/1000) + 'K' } }
+    }
+  }
+});
+
+const ctxTraffic = document.getElementById('trafficChart').getContext('2d');
+new Chart(ctxTraffic, {
+  type: 'doughnut',
+  data: {
+    labels: ['Organic', 'Social', 'Direct', 'Referral', 'Email'],
+    datasets: [{
+      data: [42, 28, 15, 10, 5],
+      backgroundColor: ['#E91E63', '#7C3AED', '#3B82F6', '#10B981', '#F59E0B'],
+      borderWidth: 0
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { position: 'bottom', labels: { color: '#94A3B8', font: { size: 11 }, padding: 16, usePointStyle: true } }
+    },
+    cutout: '70%'
+  }
+});
+</script>
+
+</body>
+</html>
